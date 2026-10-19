@@ -1,0 +1,123 @@
+{
+  "meta": { "title": "pi — one run", "lang": "zh-CN" },
+  "canvas": { "width": 1600, "height": 900, "duration": 24, "fps": 30, "preroll": 0 },
+  "theme": { "preset": "terminal-dark", "fontSize": 21, "lineHeight": 30 },
+  "clock": { "start": "09:41:00", "rate": 1 },
+  "titlebar": { "text": "pi — one run · request → tools → record → next turn", "height": 42, "size": 18 },
+  "credit": { "text": "依据 Pi 官方 How Pi Works · 动画计数为示意", "y": 872, "size": 14 },
+  "machines": {
+    "seq": {
+      "type": "cycle",
+      "period": 6,
+      "t0": 0,
+      "values": [
+        { "t": "assemble" },
+        { "t": "send" },
+        { "t": "stream" },
+        { "t": "tool" },
+        { "t": "record" },
+        { "t": "next" }
+      ],
+      "log": { "who": "pi", "c": "gr" }
+    },
+    "turns": { "type": "counter", "start": 1, "rate": 0.09, "format": "comma" },
+    "calls": { "type": "counter", "start": 0, "rate": 0.55, "format": "comma" },
+    "core": {
+      "type": "triggers",
+      "period": 9,
+      "on": 5,
+      "t0": 0.5,
+      "color": "ye",
+      "onText": "in use",
+      "offText": "idle",
+      "items": [
+        { "name": "system prompt", "adv": ["基础指令 + 上下文文件", "+ 工具 + skill 描述"], "to": "→ assemble" },
+        { "name": "active branch", "adv": ["leaf → root 的路径", "含 compaction 摘要"], "to": "→ assemble" },
+        { "name": "tools", "adv": ["定义随请求发送", "由 pi 执行"], "to": "→ execute" },
+        { "name": "model settings", "adv": ["模型与 thinking", "每次请求都带"], "to": "→ assemble" }
+      ]
+    }
+  },
+  "elements": [
+    { "type": "box", "x": 50, "y": 160, "w": 210, "h": 140, "color": "cy", "pad": [14, 16], "lines": [
+      { "t": "① 用户消息", "c": "cy", "b": 1 },
+      "user message",
+      { "t": "追加进分支", "c": "dim" }
+    ]},
+    { "type": "box", "x": 290, "y": 160, "w": 280, "h": 140, "color": "bl", "pad": [14, 16], "lines": [
+      { "t": "② active branch", "c": "bl", "b": 1 },
+      "leaf → root",
+      { "t": "含压缩摘要", "c": "dim" }
+    ]},
+    { "type": "box", "x": 610, "y": 150, "w": 360, "h": 160, "color": "gr", "pad": [14, 16], "lines": [
+      { "t": "③ 组装请求", "c": "gr", "b": 1 },
+      "system prompt",
+      "分支 + tools",
+      "model settings"
+    ]},
+    { "type": "box", "x": 1010, "y": 160, "w": 210, "h": 140, "color": "pu", "pad": [14, 16], "lines": [
+      { "t": "④ provider", "c": "pu", "b": 1 },
+      { "t": "发出请求", "c": "dim" },
+      { "t": "按选定模型", "c": "dim" }
+    ]},
+    { "type": "box", "x": 1010, "y": 400, "w": 220, "h": 140, "color": "pu", "pad": [14, 16], "lines": [
+      { "t": "⑤ 流式响应", "c": "pu", "b": 1 },
+      "text / toolCall",
+      { "t": "记录 response", "c": "dim" }
+    ]},
+    { "type": "box", "x": 720, "y": 400, "w": 260, "h": 140, "color": "ye", "pad": [14, 16], "lines": [
+      { "t": "⑥ 执行工具", "c": "ye", "b": 1 },
+      "toolCall → result",
+      { "t": "记录结果", "c": "dim" }
+    ]},
+    { "type": "box", "x": 440, "y": 400, "w": 250, "h": 140, "color": "gr", "pad": [14, 16], "lines": [
+      { "t": "⑦ 记录 entry", "c": "gr", "b": 1 },
+      "写回 session",
+      { "t": "一个 turn 结束", "c": "dim" }
+    ]},
+    { "type": "box", "x": 160, "y": 400, "w": 250, "h": 140, "color": "cy", "pad": [14, 16], "lines": [
+      { "t": "⑧ 下一 turn？", "c": "cy", "b": 1 },
+      "还有待处理？",
+      { "t": "→ 再来 / 结束", "c": "dim" }
+    ]},
+
+    { "type": "path", "points": [[260, 230], [290, 230]], "color": "cy", "flow": { "period": 2, "offsets": [0], "color": "cy" } },
+    { "type": "path", "points": [[570, 230], [610, 230]], "color": "bl", "flow": { "period": 2, "offsets": [0.5], "color": "bl" } },
+    { "type": "path", "points": [[970, 230], [1010, 230]], "color": "gr", "flow": { "period": 2, "offsets": [1.0], "color": "gr" } },
+    { "type": "path", "points": [[1115, 300], [1115, 400]], "color": "pu", "flow": { "period": 2, "offsets": [0.2], "color": "pu" } },
+    { "type": "path", "points": [[1010, 470], [980, 470]], "color": "pu", "flow": { "period": 2, "offsets": [0.7], "color": "pu" } },
+    { "type": "path", "points": [[720, 470], [690, 470]], "color": "ye", "flow": { "period": 2, "offsets": [1.2], "color": "ye" } },
+    { "type": "path", "points": [[440, 470], [410, 470]], "color": "gr", "flow": { "period": 2, "offsets": [1.6], "color": "gr" } },
+    { "type": "path", "points": [[285, 540], [285, 595], [705, 595], [705, 310]], "color": "cy", "dash": true, "flow": { "period": 2.4, "offsets": [0.3], "color": "cy" } },
+
+    { "type": "box", "x": 1250, "y": 150, "w": 320, "h": 260, "color": "ye", "pad": [14, 16], "lines": [
+      { "t": "核心要素", "c": "ye", "b": 1 },
+      { "trigger": ["core", 0] },
+      { "trigger": ["core", 1] },
+      { "trigger": ["core", 2] },
+      { "trigger": ["core", 3] }
+    ]},
+    { "type": "box", "x": 1250, "y": 430, "w": 320, "h": 140, "color": "dim", "pad": [12, 14], "lines": [
+      { "t": "说明", "c": "dim", "b": 1 },
+      { "runs": [{ "v": "core.adv0", "c": "fg" }] },
+      { "runs": [{ "v": "core.adv1", "c": "dim" }] }
+    ]},
+
+    { "type": "log", "x": 60, "y": 650, "w": 1140, "rows": 4, "padTop": 12, "padBottom": 16, "padLeft": 18, "title": "session log", "titleX": 8, "titleW": 150, "cols": [
+      { "key": "time", "x": 150 },
+      { "key": "who", "x": 260 },
+      { "key": "m", "x": 380 },
+      { "key": "g", "x": 840 }
+    ]},
+
+    { "type": "text", "x": 1250, "y": 610, "w": 320, "align": "left", "runs": [{ "t": "turns ", "c": "dim" }, { "v": "turns", "c": "wh", "b": 1 }] },
+    { "type": "text", "x": 1250, "y": 645, "w": 320, "align": "left", "runs": [{ "t": "tool calls ", "c": "dim" }, { "v": "calls", "c": "ye", "b": 1 }] },
+    { "type": "text", "x": 1250, "y": 680, "w": 320, "align": "left", "runs": [{ "t": "packets ", "c": "dim" }, { "v": "packets", "c": "gr", "b": 1 }] },
+
+    { "type": "text", "x": 0, "y": 825, "w": 1600, "align": "center", "runs": [
+      { "t": "now: ", "c": "dim" },
+      { "v": "seq.t", "c": "cy", "b": 1 },
+      { "t": "   ·   有 toolResult 或排队消息就再来一轮，否则 run 结束", "c": "dim" }
+    ]}
+  ]
+}
